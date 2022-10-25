@@ -19,9 +19,10 @@ const readFile = async (filename) => {
   })
 }
 
-const processCSV = async (filename, transformerFunction) => {
+const processCSV = async (type, filename, transformerFunction) => {
   let results = []
-  const rows = await readFile(filename)
+  let rows = filename
+  if (type === 'machine') rows = await readFile(filename)
   rows?.map((row) => {
     results.push(transformerFunction(row))
   })
